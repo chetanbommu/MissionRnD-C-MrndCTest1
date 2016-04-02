@@ -31,7 +31,14 @@ Difficulty : Medium
 #include <stdio.h>
 #include <math.h>
 
-int * find_sequences(int *arr, int len){
+int * find_sequences(int *arr, int len)
+{	
+	int resultArray[6],index1,index2,index3,index4,index5,index6;
+	int variable,temp;
+	for (variable = 0; variable < len; variable++)
+	{
+		
+	}
 	//Return final array which has 6indexes [AP1_S,AP1_E,AP2_S,AP2_E,GP1_S,GP2_E]
-	return NULL;
+	return resultArray;
 }

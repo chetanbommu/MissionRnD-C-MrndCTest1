@@ -27,12 +27,75 @@ Difficulty : Medium
 */
 #include <stdlib.h>
 #include <stdio.h>
-
 struct node{
 	int data;
 	struct node *next;
 };
-int merge_circularlists(struct node **head1, struct node **head2){
+int getCount(struct node *head)
+{
+	int count = 0;
+	struct node* current = head;
+	while (current != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	return count;
+}
+void bubbleSort(struct node *start)
+{
+	int swapped, i;
+	struct node *ptr1;
+	struct node *lptr = NULL;
+
+	if (ptr1 == NULL)
+		return;
+	do
+	{
+		swapped = 0;
+		ptr1 = start;
+
+		while (ptr1->next != lptr)
+		{
+			if (ptr1->data > ptr1->next->data)
+			{
+				swap(ptr1, ptr1->next);
+				swapped = 1;
+			}
+			ptr1 = ptr1->next;
+		}
+		lptr = ptr1;
+	} while (swapped);
+}
+
+void swap(struct node *a, struct node *b)
+{
+	int temp = a->data;
+	a->data = b->data;
+	b->data = temp;
+}
+struct node *merge(struct node *p, struct node *q)
+{
+	struct node *temp = NULL;
+	struct node *r = NULL;
+	r = p;
+	temp = p;
+	while (temp->next != p)
+		temp = temp->next;
+	temp->next = q;
+	temp = q;
+	while (temp->next != q)
+		temp = temp->next;
+	temp->next = r;
+	return (r);
+}
+
+int merge_circularlists(struct node **head1, struct node **head2)
+{
+	int result;
 	//Returns Length of merged Sorted circular SLL and also points *head1 to final SLL .
-	return -1;
+	*head1 = merge(*head1, *head2);
+	bubbleSort(*head1);
+	result = getCount(*head1);
+	return result;
 }

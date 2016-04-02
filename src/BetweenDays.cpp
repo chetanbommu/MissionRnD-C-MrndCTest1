@@ -23,12 +23,91 @@ Difficulty : Hard
 #include <stdio.h>
 #include <math.h>
 
-struct node{
+struct node
+{
 	int data;
 	struct node *next;
 };
 
-
-int between_days(struct node *date1head, struct node *date2head){
-	return -1;
+int between_days(struct node *date1head, struct node *date2head)
+{
+	int val=0,var,date1=0,mon1=0,year1=0,date2=0,mon2=0,year2=0;
+	int result=0,res_years,res_days,res_months;
+	for (var = 0;var<8; var++)
+	{
+		val = date1head->data;
+		date1head = date1head->next;
+		if (val < 2)
+		{
+			date1 = date1 * 10 + val;
+		}
+		if (val > 1 && val < 4)
+		{
+			mon1 = mon1 * 10 + val;
+		}
+		if (val > 3 && val < 8)
+		{
+			year1 = year1 * 10 + val;
+		}
+	}
+	for (var = 0; var<8; var++)
+	{
+		val = date2head->data;
+		date2head = date2head->next;
+		if (val < 2)
+		{
+			date1 = date1 * 10 + val;
+		}
+		if (val > 1 && val < 4)
+		{
+			mon1 = mon1 * 10 + val;
+		}
+		if (val > 3 && val < 8)
+		{
+			year1 = year1 * 10 + val;
+		}
+	}
+	if (mon2 > mon1)
+	{
+		res_years = year2 - year1;
+		res_months = mon2 - mon1;
+		res_days = date2 - date1;
+		result = res_days + (res_months * 31) + (res_years * 365);
+	}
+	else if (mon2 == mon1)
+	{
+		if (date2 > date1)
+		{
+			res_years = year2 - year1;
+			res_months = 0;
+			res_days = date2 - date1;
+			result = res_days + (res_years * 365);
+		}
+		else if (date2 == date1)
+		{
+			res_years = year2 - year1;
+			result = (res_years)* 365;
+		}
+		else
+		{
+			res_years = year2 - year1;
+			res_days = date2 - date1;
+			result = res_days + (res_years * 365);
+		}
+	}
+	else if (mon1 > mon2)
+	{
+		res_years = year2 - year1;
+		res_months = mon1 - mon2;
+		res_days = date2 - date1;
+		result = res_days - (res_months * 31) + (res_years * 365);
+	}
+	if (result>0)
+	{
+		return result;
+	}
+	else if (result < 0)
+	{
+		return NULL;
+	}
 }
